@@ -24,8 +24,8 @@ class ShiftScheduler:
             sub_day = cycle_day_idx + 1  # 1, 2, or 3
             badge_color = "#3B82F6"  # Blue
             icon = "🌅"
-            energy_level = "Moderate"
-            energy_desc = "Light maintenance (30-45 mins). Evening quick review. Rest early."
+            energy_level = "12h Shift Day"
+            energy_desc = "12-Hour Shift (07:00 AM - 07:00 PM). Work duties & ad-hoc micro-breaks. Optional 30m evening review only if fresh. Sleep early."
             next_phase_name = "Night Shift"
             days_to_next = 3 - cycle_day_idx
         elif 3 <= cycle_day_idx <= 5:
@@ -33,8 +33,8 @@ class ShiftScheduler:
             sub_day = cycle_day_idx - 2  # 1, 2, or 3
             badge_color = "#8B5CF6"  # Purple
             icon = "🌙"
-            energy_level = "Low / Inverted"
-            energy_desc = "Survival & Recovery. Zero forced coding. Sleep prioritized."
+            energy_level = "12h Night Shift"
+            energy_desc = "12-Hour Night Shift (07:00 PM - 07:00 AM). Inverted cycle. Mandatory daytime recovery sleep (08:00 AM - 03:30 PM). Zero forced study."
             next_phase_name = "Power Off-Days"
             days_to_next = 6 - cycle_day_idx
         else:
@@ -42,8 +42,8 @@ class ShiftScheduler:
             sub_day = cycle_day_idx - 5  # 1, 2, or 3
             badge_color = "#10B981"  # Emerald Green
             icon = "⚡"
-            energy_level = "Maximum Power"
-            energy_desc = "Deep Work Power Window (2 hours). Full energy for labs & building."
+            energy_level = "Maximum Power (Off-Day)"
+            energy_desc = "Full Off-Day (Zero work shifts). High cognitive energy. 2 deep work power sprints for labs, lecture notes & building."
             next_phase_name = "Morning Shift"
             days_to_next = 9 - cycle_day_idx
 
@@ -62,31 +62,32 @@ class ShiftScheduler:
         }
 
     def _generate_24h_plan(self, shift_type: str, sub_day: int) -> List[Dict[str, str]]:
-        """Generate tailored 24-hour itinerary matching current shift circadian rhythm."""
+        """Generate tailored 24-hour itinerary matching 12-hour rotational shifts with explicit AM/PM."""
         if shift_type == "Morning":
             return [
-                {"time": "06:00 - 07:30", "activity": "Morning Routine & Commute to Morning Shift", "category": "Work"},
-                {"time": "08:00 - 15:00", "activity": "Morning Work Shift & University Lectures", "category": "Work/School"},
-                {"time": "15:30 - 18:00", "activity": "Return to Hostel, Rest, Dinner & Reset", "category": "Rest"},
-                {"time": "18:30 - 19:30", "activity": "FUNAAB School Lecture Notes & Review", "category": "Study"},
-                {"time": "20:00 - 20:45", "activity": "Chronos Golden Window: 1 Google Cloud / Coursera Topic", "category": "Tech"},
-                {"time": "21:30 - 06:00", "activity": "Uninterrupted Sleep (Protect your energy)", "category": "Rest"}
+                {"time": "05:45 AM - 07:00 AM", "activity": "Wake-up, Prep & Commute to Morning Shift", "category": "Routine"},
+                {"time": "07:00 AM - 07:00 PM", "activity": "12-Hour Morning Shift (Work duties • Ad-hoc micro-reading if quiet)", "category": "Work (12h)"},
+                {"time": "07:00 PM - 08:15 PM", "activity": "Commute from Work, Dinner & Decompress", "category": "Rest"},
+                {"time": "08:30 PM - 09:15 PM", "activity": "Optional Evening Pocket (30-45m: FUNAAB notes or 1 Cloud lesson if energy allows)", "category": "Light Study"},
+                {"time": "09:30 PM - 05:45 AM", "activity": "Mandatory Sleep & Recovery (Protect your body)", "category": "Sleep"}
             ]
         elif shift_type == "Night":
             return [
-                {"time": "08:00 - 15:30", "activity": "MANDATORY RECOVERY SLEEP (Do not disturb)", "category": "Rest"},
-                {"time": "16:00 - 17:30", "activity": "Wake up, Hydrate, Healthy Meal & Light Air", "category": "Health"},
-                {"time": "18:00 - 19:00", "activity": "Optional: Listen to 1 OSINT/Cyber Podcast or Audio lesson", "category": "Light"},
-                {"time": "20:00 - 07:00", "activity": "Night Shift Operations (Stay hydrated & alert)", "category": "Work"}
+                {"time": "07:00 AM - 08:00 AM", "activity": "Return Home from Night Shift, Shower & Wind Down", "category": "Rest"},
+                {"time": "08:00 AM - 03:30 PM", "activity": "Protected Daytime Recovery Sleep (7.5h uninterrupted • Do not disturb)", "category": "Sleep"},
+                {"time": "03:30 PM - 05:00 PM", "activity": "Wake-up, Balanced Meal, Hydrate & Fresh Air", "category": "Health"},
+                {"time": "05:00 PM - 06:15 PM", "activity": "Pre-Shift Reset • Optional: 1 OSINT/Cyber podcast or school notes", "category": "Light"},
+                {"time": "06:15 PM - 07:00 PM", "activity": "Commute to Night Shift Station", "category": "Commute"},
+                {"time": "07:00 PM - 07:00 AM", "activity": "12-Hour Night Shift (Work duties • Ad-hoc micro-reading if quiet)", "category": "Work (12h)"}
             ]
         else:  # Off days
             return [
-                {"time": "08:00 - 09:30", "activity": "Natural Wake-Up, Breakfast & Day Planning", "category": "Health"},
-                {"time": "10:00 - 12:00", "activity": "⚡ Power Engine Sprint 1: Hands-on Labs (AWS / OSINT)", "category": "Tech"},
-                {"time": "12:00 - 14:00", "activity": "Lunch, Walk, Rest Eyes & Social Break", "category": "Rest"},
-                {"time": "14:30 - 16:30", "activity": "⚡ Power Engine Sprint 2: Code / GitHub Commit / Lecture prep", "category": "Tech"},
-                {"time": "17:00 - 21:00", "activity": "Personal Freedom Time, Friends, Laundry, Chores", "category": "Life"},
-                {"time": "22:00 - 07:00", "activity": "Deep Sleep Reset", "category": "Rest"}
+                {"time": "08:00 AM - 09:30 AM", "activity": "Natural Wake-Up, Breakfast & Day Planning", "category": "Health"},
+                {"time": "10:00 AM - 12:30 PM", "activity": "⚡ Power Engine Sprint 1: Hands-on Labs (Google Cloud / AWS / TryHackMe)", "category": "Deep Tech"},
+                {"time": "12:30 PM - 02:30 PM", "activity": "Lunch, Walk, Rest Eyes & Social Break", "category": "Rest"},
+                {"time": "02:30 PM - 05:00 PM", "activity": "⚡ Power Engine Sprint 2: FUNAAB Lecture Notes Revision & Code commits", "category": "University"},
+                {"time": "05:00 PM - 09:30 PM", "activity": "Personal Freedom Time, Friends, Laundry, Chores & Relaxation", "category": "Life"},
+                {"time": "10:00 PM - 08:00 AM", "activity": "Deep Sleep Reset", "category": "Sleep"}
             ]
 
 scheduler = ShiftScheduler()

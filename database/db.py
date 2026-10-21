@@ -71,13 +71,13 @@ def init_db():
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
         """, seed_apps)
         
-    # Seed default tasks / streaks if empty
+    # Seed default tasks / streaks if empty (Start all streaks at 0 clean)
     cursor.execute("SELECT COUNT(*) FROM tasks;")
     if cursor.fetchone()[0] == 0:
         seed_tasks = [
-            ("TryHackMe 1 Room Streak", "Streak", 1, 0, None, "https://tryhackme.com"),
-            ("Mentor Me Collective Google Cloud Lab", "Certification", 3, 0, None, "https://coursera.org"),
-            ("FUNAAB Lecture Notes Revision (30 mins)", "University", 2, 0, None, None),
+            ("TryHackMe 1 Room Streak", "Streak", 0, 0, None, "https://tryhackme.com"),
+            ("Mentor Me Collective Google Cloud Lab", "Certification", 0, 0, None, "https://coursera.org"),
+            ("FUNAAB Lecture Notes Revision (30 mins)", "University", 0, 0, None, None),
             ("Check SANS & Outreachy Portal Updates", "Career", 0, 0, None, "https://sans.edu")
         ]
         cursor.executemany("""
