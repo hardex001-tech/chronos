@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function initApp() {
   await loadShiftStatus();
+  try { await fetch("/api/tasks/sync"); } catch(e) {}
   await loadTasks();
   await loadApplications();
   setupEventListeners();

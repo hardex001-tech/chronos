@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import date
 from database.db import get_connection
+from core.sync import sync_github_streak, sync_tryhackme_streak
 
 router = APIRouter(prefix="/api/tasks", tags=["Tasks & Streaks"])
 
@@ -10,6 +11,13 @@ class TaskCreate(BaseModel):
     title: str
     category: Optional[str] = "Streak"
     target_link: Optional[str] = None
+
+@router.get("/sync")
+async def auto_sync_streaks(thm_username: Optional[str] = None):
+    """Automatically check GitHub events and TryHackMe profile to update streaks."""
+    gh_res = await sync_github_streak("hardex001-tech")
+    thm_res = await sync_tryhackme_streak(thm_username or "")
+    return {"github": gh_res, "tryhackme": thm_res}
 
 @router.get("")
 def list_tasks():
