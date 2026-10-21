@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Chronos — Master of Time</title>
+  
+  <!-- PWA Metadata for Samsung S21 & Mobile Devices -->
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#070B14">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-logo">C</div>
+        <div>
+          <h1>CHRONOS</h1>
+          <p>Sentinel • Master of Time</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button onclick="requestPushPermission()" class="user-badge" style="cursor: pointer; border-color: #00E5FF; color: #00E5FF; background: transparent;">
+          🔔 Enable Push
+        </button>
+        <div class="user-badge">
+          Abdulrazaq A.
+        </div>
+      </div>
+    </header>
+
+    <!-- Shift Hero Card (Calculated automatically from Oct 20 Anchor) -->
+    <section class="shift-hero">
+      <div class="shift-meta">
+        <div class="shift-title-box">
+          <h2 id="shift-title">Loading Shift Status...</h2>
+          <p class="shift-subtitle" id="shift-date">Calculating rotation phase...</p>
+        </div>
+        <span class="shift-pill" id="shift-pill">ACTIVE</span>
+      </div>
+      <div class="energy-box">
+        <p id="energy-text"><strong>Energy Profile:</strong> Calculating...</p>
+        <p id="next-phase-text" style="margin-top: 4px; font-size: 12px; color: #94A3B8;"></p>
+      </div>
+    </section>
+
+    <!-- Daily Streaks & Habits -->
+    <div class="section-title">
+      <span>🔥 Daily Streaks & Milestones</span>
+      <span style="font-size: 12px; color: #94A3B8;">Tap checkbox to mark done</span>
+    </div>
+    <div class="task-list" id="task-list">
+      <!-- Tasks rendered dynamically by app.js -->
+    </div>
+
+    <!-- 24-Hour Adaptive Daily Plan -->
+    <div class="section-title">
+      <span>⏱️ Today's 24-Hour Circadian Plan</span>
+      <span style="font-size: 12px; color: #00E5FF;">Shift-Synchronized</span>
+    </div>
+    <div class="timeline-list" id="timeline-list">
+      <!-- Timeline rendered dynamically by app.js -->
+    </div>
+
+    <!-- Applications & Opportunities Tracker -->
+    <div class="section-title">
+      <span>🎯 Tracked Applications & Certifications</span>
+      <span style="font-size: 12px; color: #94A3B8;">Live Radar Active</span>
+    </div>
+    <div class="apps-grid" id="apps-grid">
+      <!-- Applications rendered dynamically by app.js -->
+    </div>
+  </div>
+
+  <!-- Floating Add Button -->
+  <div class="fab-container">
+    <button class="fab" id="open-modal-btn" title="Add Application or Task">+</button>
+  </div>
+
+  <!-- Modal: Add New Application / Link -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>+ Track New Application / URL</h3>
+        <button class="close-btn" id="close-modal-btn">&times;</button>
+      </div>
+      
+      <form id="app-form">
+        <div class="form-group">
+          <label>Website / Application URL</label>
+          <input type="url" id="app-url-input" class="form-input" placeholder="https://sans.edu/admissions/paller..." required>
+        </div>
+
+        <!-- Scrape Preview Box (Automatically pops up when link is pasted) -->
+        <div class="scrape-preview" id="scrape-preview"></div>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label>Opportunity / Course Title</label>
+          <input type="text" id="app-title-input" class="form-input" placeholder="e.g. SANS Paller Cybersecurity Scholarship" required>
+        </div>
+
+        <div class="form-group">
+          <label>Company / Platform</label>
+          <input type="text" id="app-company-input" class="form-input" placeholder="e.g. SANS Institute" required>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <div class="form-group" style="flex: 1;">
+            <label>Category</label>
+            <select id="app-category-select" class="form-input">
+              <option value="Job">Job / Internship</option>
+              <option value="Fellowship">Fellowship / Grant</option>
+              <option value="Certification">Certification</option>
+              <option value="Competition">Competition / Hackathon</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label>Current Status</label>
+            <select id="app-status-select" class="form-input">
+              <option value="Applied">Applied</option>
+              <option value="Under Review">Under Review</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Ongoing">Ongoing</option>
+              <option value="Interview">Interview</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Notes / Deadlines</label>
+          <input type="text" id="app-notes-input" class="form-input" placeholder="e.g. Exam in late November. Prelim deadline Nov 30.">
+        </div>
+
+        <!-- Hidden inputs for auto-scraped metadata -->
+        <input type="hidden" id="app-logo-input">
+        <input type="hidden" id="app-domain-input">
+
+        <button type="submit" class="btn-primary">Track in Chronos ➔</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
