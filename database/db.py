@@ -61,7 +61,7 @@ def init_db():
     cursor.execute("SELECT COUNT(*) FROM applications;")
     if cursor.fetchone()[0] == 0:
         seed_apps = [
-            ("University of the People — Term 2 (Programming 2)", "University of the People", "https://your.uopeople.edu/", "https://www.uopeople.edu/wp-content/themes/uopeople/images/favicon.ico", "Enrolled", "Degree", "2026-10-21", "2026-11-12", "uopeople.edu", "Term 2 starts Nov 12, 2026. Late registration Nov 6-8. Term 3 reg opens Dec 10."),
+            ("University of the People — Term 2 (Programming 2)", "University of the People", "https://your.uopeople.edu/", "/static/icons/uopeople.png", "Enrolled", "Degree", "2026-10-21", "2026-11-12", "uopeople.edu", "Term 2 starts Nov 12, 2026. Late registration Nov 6-8. Term 3 reg opens Dec 10."),
             ("Huawei ICT Competition 2026-2027", "Huawei", "https://e.huawei.com/en/talent/", "https://www.huawei.com/favicon.ico", "Ongoing", "Competition", "2026-10-07", "2026-11-30", "huawei.com", "Network Track (HCIA-Datacom). Prelim exam late Nov."),
             ("Microsoft Learn Student Ambassadors", "Microsoft", "https://mvp.microsoft.com/studentambassadors", "https://www.microsoft.com/favicon.ico", "Under Review", "Fellowship", "2026-10-07", "2026-11-15", "microsoft.com", "Quarterly batch review. Joined official Discord."),
             ("Google Cloud Cybersecurity (Mentor Me)", "Mentor Me Collective", "https://mentormecollective.org", "", "In Progress", "Certification", "2026-10-10", "2026-11-20", "mentormecollective.org", "Active class cohort. Working on OSINT and Cloud Security modules."),

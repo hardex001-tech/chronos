@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080D1A"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="50%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background rounded hexagon / shield -->
+  <rect width="512" height="512" rx="120" fill="url(#bgGrad)"/>
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="none" stroke="url(#ringGrad)" stroke-width="6" opacity="0.4"/>
+
+  <!-- Outer Chronometer Dial -->
+  <circle cx="256" cy="256" r="170" fill="none" stroke="url(#ringGrad)" stroke-width="12" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#1E293B" stroke-width="4" stroke-dasharray="8 12"/>
+
+  <!-- Hour markers -->
+  <circle cx="256" cy="96" r="6" fill="#00E5FF"/>
+  <circle cx="416" cy="256" r="6" fill="#3B82F6"/>
+  <circle cx="256" cy="416" r="6" fill="#8B5CF6"/>
+  <circle cx="96" cy="256" r="6" fill="#00E5FF"/>
+
+  <!-- Dynamic Chronos Time Hands / Sentinel Sword -->
+  <polygon points="256,120 270,256 256,275 242,256" fill="url(#ringGrad)"/>
+  <polygon points="256,256 360,285 256,275" fill="#00E5FF" opacity="0.9"/>
+
+  <!-- Radiant Core (Center) -->
+  <circle cx="256" cy="256" r="28" fill="url(#coreGrad)" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="12" fill="#FFFFFF"/>
+</svg>

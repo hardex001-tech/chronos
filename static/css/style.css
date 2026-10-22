@@ -29,12 +29,42 @@ body {
   color: var(--text-main);
   min-height: 100vh;
   padding-bottom: 90px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Ambient Background Watermark - Glowing & Reflecting Through Behind */
+.ambient-watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 520px;
+  height: 520px;
+  max-width: 90vw;
+  max-height: 90vw;
+  background-image: url("/static/icons/logo.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.055;
+  filter: drop-shadow(0 0 60px rgba(0, 229, 255, 0.4)) drop-shadow(0 0 100px rgba(139, 92, 246, 0.3));
+  pointer-events: none;
+  z-index: 0;
+  animation: subtleFloat 14s ease-in-out infinite alternate;
+}
+
+@keyframes subtleFloat {
+  0% { transform: translate(-50%, -50%) scale(0.96) rotate(0deg); opacity: 0.045; }
+  100% { transform: translate(-50%, -50%) scale(1.04) rotate(4deg); opacity: 0.075; }
 }
 
 .container {
   max-width: 900px;
   margin: 0 auto;
   padding: 16px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Header */
@@ -49,20 +79,15 @@ header {
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .brand-logo {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 18px;
-  color: #000;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.5));
 }
 
 .brand h1 {
